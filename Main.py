@@ -13,7 +13,7 @@ def createTable():
 
     db.row_factory = sqlite3.Row
     #creating the table
-    db.execute("create table if not exists Admin(Name text , Age int , Sex text , Address text)")
+    db.execute("create table if not exists Admin(ID integer primary key autoincrement , Name text , Age int , Sex text , Address text)")
     db.commit()
 
 #function for adding records
@@ -26,18 +26,18 @@ def addRecords(Name,Age,Sex,Address):
     db.commit()
 
 #function for deleting records
-def deleteRecords(name):
+def deleteRecords(ID):
     db.row_factory = sqlite3.Row
     # creating the table
-    db.execute("delete from Admin where Name = '{}'".format(name))
+    db.execute("delete from Admin where ID = {}".format(ID))
     print("Record has been deleted successfully! ")
     db.commit()
 
 #function for updating records
-def updateRecords(Name,Age):
+def updateRecords(ID,Age):
     db.row_factory = sqlite3.Row
     # creating the table
-    db.execute("update Admin set Age=? where Name=?", (Age,Name))
+    db.execute("update Admin set Age=? where ID=?", (Age,ID))
     print("Record has been Updated successfuly! ")
     # commit/add data to the database
     db.commit()
@@ -49,7 +49,7 @@ def listAdmins():
     cursor = db.execute("select * from Admin")
     #loop all admins for display
     for row in cursor:
-        print("Name : {} , Age {} : ,Sex : {} , Address : {} ".format(row["Name"],row["Age"],row["Sex"],row["Address"]))
+        print("ID : {} , Name : {} , Age {} : ,Sex : {} , Address : {} ".format(row["ID"],row["Name"],row["Age"],row["Sex"],row["Address"]))
 
 
 
@@ -85,12 +85,12 @@ def main():
             listAdmins()
         elif (indexOperation == 3):
             print("Delete User from Database: ")
-            Name = input("Enter the user u need to delete: ")
-            deleteRecords(Name)
+            ID = int(input("Enter the ID of user u need to delete: "))
+            deleteRecords(ID)
         elif(indexOperation == 4):
-            Name = input("Enter Admins Name : ")
+            ID = input("Enter Admins ID : ")
             Age = int(input("Enter new Age :"))
-            updateRecords(Name, Age)
+            updateRecords(ID, Age)
 
 
 
