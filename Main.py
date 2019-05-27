@@ -24,6 +24,15 @@ def addRecords(Name,Age,Sex,Address):
     # commit/add data to the database
     db.commit()
 
+def listAdmins():
+    #selectadmins from database
+    cursor = db.execute("select * from Admin")
+    #loop all admins for display
+    for row in cursor:
+        print("Name : {} , Age {} : ,Sex : {} , Address : {} ".format(row["Name"],row["Age"],row["Sex"],row["Address"]))
+
+
+
 
 
 
@@ -31,14 +40,21 @@ def main():
 
     #call create table function
     createTable()
-    indexOperation = int(input("\n\tSELECT AN OPERATION \n\n\t 1 - Add Record - "))
+    indexOperation = int(input("\n\tSELECT AN OPERATION \n\n\t 1 - Add Record / 2 List Admins -  "))
+
     #capture selection of input
+    #call funciton addRecords if selction == 1
     if(indexOperation == 1):
         Name = input("\n\tEnter Name : ")
         Age =  int(input("\n\tEnter age : "))
         Sex = input("\n\tEnter Sex (Male/Female/None) : ")
         Address = input("\n\tEnter Your Address : ")
         addRecords(Name,Age,Sex,Address)
+    elif(indexOperation == 2):
+        #call function listAdmins if selection == 2
+        listAdmins()
+
+
 
 
 
