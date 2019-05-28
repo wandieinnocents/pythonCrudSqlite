@@ -84,7 +84,7 @@ def main():
             # call function listAdmins if selection == 2
             listAdmins()
         elif (indexOperation == 3):
-            print("Delete User from Database: ")
+            print("Delete : User from Database: ")
             ID = int(input("Enter the ID of user u need to delete: "))
             deleteRecords(ID)
         elif(indexOperation == 4):
